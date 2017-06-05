@@ -5,6 +5,7 @@ import com.bobocode.model.Account;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import java.util.List;
 
 
 public class AccountDaoImpl implements AccountDao {
@@ -26,6 +27,30 @@ public class AccountDaoImpl implements AccountDao {
         em.close();
 
         return account;
+    }
+
+    @Override
+    public List<Account> findAll() {
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+
+        List<Account> accountList = em.createQuery("select a from Account a", Account.class).getResultList();
+
+        em.getTransaction().commit();
+        em.close();
+
+        return accountList;
+    }
+
+    @Override
+    public void save(Account account) {
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+
+        em.persist(account);
+
+        em.getTransaction().commit();
+        em.close();
     }
 
 

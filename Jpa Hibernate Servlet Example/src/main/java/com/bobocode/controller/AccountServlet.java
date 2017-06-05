@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.List;
 
 import static com.bobocode.util.StringUtil.getUrlMapping;
 import static com.bobocode.util.StringUtil.isId;
@@ -41,8 +44,10 @@ public class AccountServlet extends HttpServlet {
         }
     }
 
-    private void processCreateAccount(HttpServletRequest req, HttpServletResponse resp) {
-
+    private void processCreateAccount(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        Account account = buildEntity(req);
+        DaoUtil.getAccountDao().save(account);
+        processGetAccount(account.getId(), req, resp);
     }
 
     private void processGetAccount(long id, HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
@@ -57,8 +62,21 @@ public class AccountServlet extends HttpServlet {
         }
     }
 
-    private void processGetList(HttpServletRequest req, HttpServletResponse resp) {
+    private void processGetList(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        List<Account> accountList = DaoUtil.getAccountDao().findAll();
+        req.setAttribute("accountList", accountList);
+        req.getRequestDispatcher("/list.jsp").forward(req, resp);
+    }
 
+    private Account buildEntity(HttpServletRequest req) {
+        String firstName = req.getParameter("firstName");
+        String lastName = req.getParameter("lastName");
+        String pass = req.getParameter("password");
+        String email = req.getParameter("email");
+        LocalDate birthday = LocalDate.parse(req.getParameter("birthday"));
+        BigDecimal balance = BigDecimal.valueOf(Double.parseDouble(req.getParameter("balance")));
+
+        return new Account(firstName, lastName, email, pass, birthday, balance);
     }
 
     private void handleError(HttpServletRequest req, HttpServletResponse resp) {
