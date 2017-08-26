@@ -5,10 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -20,11 +17,14 @@ public class Account {
     @Id
     @GeneratedValue
     private Long id;
+    @Column(name = "first_name")
     private String firstName;
+    @Column(name = "last_name")
     private String lastName;
     private String email;
     private String password;
     private LocalDate birthday;
+    @Column(name = "creation_date")
     private LocalDate creationDate;
     private BigDecimal balance = BigDecimal.ZERO;
 

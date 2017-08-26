@@ -1,6 +1,9 @@
 group 'com.bobocode'
 version '1.0'
 
+apply plugin: 'application'
+
 dependencies{
-    compile 'com.bobocode:jpa-hibernate-util:1.0-SNAPSHOT'
+//    compile 'com.bobocode:jpa-hibernate-util:1.0-SNAPSHOT'
+    compile project(':jpa-hibernate-util')
 }

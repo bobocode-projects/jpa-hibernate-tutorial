@@ -1,8 +1,6 @@
 group 'com.bobocode'
 version '1.0-SNAPSHOT'
 
-apply plugin: 'java'
-
 dependencies {
-    compile 'com.bobocode:jpa-hibernate-model:1.0-SNAPSHOT'
+    compile project(':jpa-hibernate-model')
 }
