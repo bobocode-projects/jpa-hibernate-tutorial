@@ -1,9 +1,8 @@
-package com.bobocode.controller;
+package com.bobocode.servlet;
 
 
 import com.bobocode.dao.AccountDao;
 import com.bobocode.model.Account;
-import com.bobocode.util.DaoUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

@@ -1,22 +1,11 @@
 group 'com.bobocode'
 version '1.0'
 
-apply plugin: 'java'
 apply plugin: 'war'
 
-sourceCompatibility = 1.8
-
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    compile 'org.projectlombok:lombok:1.16.12'
-
-    compile "org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final-redhat-1"
-    compile "org.hibernate:hibernate-core:5.2.4.Final"
-    compile 'org.postgresql:postgresql:9.4.1212'
-
+dependencies{
     compile "javax.servlet:javax.servlet-api:3.1.0"
     compile "javax.servlet:jstl:1.2"
+
+    compile 'com.bobocode:jpa-hibernate-util:1.0-SNAPSHOT'
 }

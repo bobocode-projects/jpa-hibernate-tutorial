@@ -1,8 +1,9 @@
-package com.bobocode.util;
+package com.bobocode.servlet;
 
 
 import com.bobocode.dao.AccountDao;
 import com.bobocode.dao.impl.AccountDaoImpl;
+import com.bobocode.util.DBUtil;
 
 import javax.persistence.EntityManagerFactory;
 

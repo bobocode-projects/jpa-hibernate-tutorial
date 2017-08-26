@@ -13,9 +13,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @NoArgsConstructor
-@Getter
-@Setter
-@ToString
+@Getter @Setter @ToString
 @Entity
 @Table(name = "account")
 public class Account {
