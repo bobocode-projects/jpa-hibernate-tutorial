@@ -10,6 +10,7 @@
             <property name="hibernate.connection.username" value="bobouser"/>
             <property name="hibernate.connection.password" value="bobopass"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL9Dialect"/>
+            <property name="log4j.logger.org.hibernate" value="warn"/>
 
         </properties>
     </persistence-unit>

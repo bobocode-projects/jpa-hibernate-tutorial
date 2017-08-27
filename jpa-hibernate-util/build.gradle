@@ -3,4 +3,5 @@ version '1.0-SNAPSHOT'
 
 dependencies {
     compile project(':jpa-hibernate-model')
+    compile 'io.codearte.jfairy:jfairy:0.5.7'
 }

@@ -38,7 +38,6 @@
                     <td>${account.email}</td>
                     <td>${account.birthday}</td>
                     <td>${account.balance}</td>
-                    <td><a href="/account/delete">Delete</a></td>
                 </tr>
             </c:forEach>
         </table>

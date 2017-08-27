@@ -18,7 +18,6 @@
     <input type="text" readonly="true" value="${account.email}"/>
     <input type="date" readonly="true" value="${account.birthday}"/>
     <input type="text" readonly="true" value="${account.balance}"/>
-
 </div>
 
 </body>

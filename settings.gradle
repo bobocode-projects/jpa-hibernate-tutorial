@@ -1,6 +1,6 @@
 rootProject.name = 'jpa-hibernate-parent'
 include 'jpa-hibernate-basics'
-include 'jpa-hibernate-servlet-example'
+include 'jpa-hibernate-servlet-task'
 include 'jpa-hibernate-util'
 include 'jpa-hibernate-model'
 

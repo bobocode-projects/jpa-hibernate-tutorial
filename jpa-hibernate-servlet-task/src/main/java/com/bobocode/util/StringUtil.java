@@ -4,7 +4,7 @@ package com.bobocode.util;
 import javax.servlet.http.HttpServletRequest;
 
 public class StringUtil {
-    public static String getUrlMapping(HttpServletRequest req) {
+    public static String parseUrlMapping(HttpServletRequest req) {
         String requestURI = req.getRequestURI();
         return requestURI.replace(req.getServletPath(), "").replace("/", "");
     }

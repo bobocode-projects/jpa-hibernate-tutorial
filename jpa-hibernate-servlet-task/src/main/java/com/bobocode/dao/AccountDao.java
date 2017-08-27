@@ -7,6 +7,8 @@ import java.util.List;
 public interface AccountDao {
     Account findOne(Long id);
 
+    Account findByEmail(String email);
+
     List<Account> findAll();
 
     void save(Account account);

@@ -21,36 +21,30 @@ public class AccountDaoImpl implements AccountDao {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
 
-        Account account = em.find(Account.class, id);
+        //todo: find account by id using EntityManager
 
         em.getTransaction().commit();
         em.close();
 
-        return account;
+        throw new UnsupportedOperationException("Method is not implemented yet. It's your homework!");
+        // todo: return account
+    }
+
+    @Override
+    public Account findByEmail(String email) {
+        // todo: implement search by email via EntityManager
+        throw new UnsupportedOperationException("Method is not implemented yet. It's your homework!");
     }
 
     @Override
     public List<Account> findAll() {
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-
-        List<Account> accountList = em.createQuery("select a from Account a", Account.class).getResultList();
-
-        em.getTransaction().commit();
-        em.close();
-
-        return accountList;
+        //todo: find and return all accounts using EntityManagers
+        throw new UnsupportedOperationException("Method is not implemented yet. It's your homework!");
     }
 
     @Override
     public void save(Account account) {
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-
-        em.persist(account);
-
-        em.getTransaction().commit();
-        em.close();
+        // todo: save an account sing EntityManager
     }
 
 
