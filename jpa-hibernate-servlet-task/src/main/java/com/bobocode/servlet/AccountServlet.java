@@ -7,6 +7,7 @@ import com.bobocode.exception.InvalidRequestParametersException;
 import com.bobocode.model.Account;
 
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -45,8 +46,11 @@ public class AccountServlet extends HttpServlet {
     private void processGetRequest(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         try {
             Long id = fetchIdParameter(req);
+            String email = req.getParameter("email");
             if (id != null) {
                 processGetById(req, resp, id);
+            } else if (email != null) {
+                processGetByEmail(req, resp, email);
             } else {
                 processGetList(req, resp);
             }
@@ -70,7 +74,7 @@ public class AccountServlet extends HttpServlet {
             try {
                 id = Long.parseLong(idStr);
             } catch (NumberFormatException e) {
-                throw new InvalidRequestParametersException("Input parameter id in not valid");
+                throw new InvalidRequestParametersException("Input parameter id is not valid");
             }
         }
         return id;
@@ -100,6 +104,18 @@ public class AccountServlet extends HttpServlet {
             req.getRequestDispatcher("/account.jsp").forward(req, resp);
         } else {
             handleNotFound(resp, "Account not found by id=" + id);
+        }
+    }
+
+    private void processGetByEmail(HttpServletRequest req, HttpServletResponse resp, String email) throws IOException, ServletException {
+        try {
+
+            Account account = accountDao.findByEmail(email);
+            req.setAttribute("account", account);
+            req.getRequestDispatcher("/account.jsp").forward(req, resp);
+
+        } catch (NoResultException e) {
+            handleNotFound(resp, "Account not found by email=" + email);
         }
     }
 
