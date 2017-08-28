@@ -38,7 +38,7 @@
             </div>
             <div class="form-group">
                 <label for="birthday">Birthday</label>
-                <input type="date"  name="birthday" class="form-control" id="birthday" placeholder="08/19/1969"/>
+                <input type="date"  name="birthday" class="form-control" id="birthday" placeholder="1969-19-08"/>
             </div>
             <div class="form-group">
                 <label for="balance">Balance</label>
