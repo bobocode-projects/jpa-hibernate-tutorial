@@ -2,14 +2,10 @@ package com.bobocode.dao.impl;
 
 import com.bobocode.dao.AccountDao;
 import com.bobocode.model.Account;
-import org.hibernate.query.criteria.internal.CriteriaDeleteImpl;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import java.util.List;
-import java.util.Optional;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
 
 import static java.util.Objects.nonNull;
 
