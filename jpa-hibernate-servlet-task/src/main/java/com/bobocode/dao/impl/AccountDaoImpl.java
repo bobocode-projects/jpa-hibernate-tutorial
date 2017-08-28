@@ -6,7 +6,7 @@ import com.bobocode.model.Account;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import java.util.List;
-
+import java.util.function.Function;
 
 public class AccountDaoImpl implements AccountDao {
 
@@ -18,34 +18,50 @@ public class AccountDaoImpl implements AccountDao {
 
     @Override
     public Account findOne(Long id) {
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-
-        //todo: find account by id using EntityManager
-
-        em.getTransaction().commit();
-        em.close();
-
-        throw new UnsupportedOperationException("Method is not implemented yet. It's your homework!");
-        // todo: return account
+        return performSelect(entityManager -> entityManager.find(Account.class, id));
     }
 
     @Override
     public Account findByEmail(String email) {
-        // todo: implement search by email via EntityManager
-        throw new UnsupportedOperationException("Method is not implemented yet. It's your homework!");
+        return performSelect(entityManager -> entityManager.createQuery("SELECT a FROM Account a WHERE a.email = :email", Account.class)
+                    .setParameter("email", email)
+                    .getSingleResult());
     }
 
     @Override
     public List<Account> findAll() {
-        //todo: find and return all accounts using EntityManagers
-        throw new UnsupportedOperationException("Method is not implemented yet. It's your homework!");
+        EntityManager entityManager = emf.createEntityManager();
+        entityManager.getTransaction().begin();
+
+        List<Account> accounts = entityManager.createQuery("SELECT a FROM Account a", Account.class).getResultList();
+
+        entityManager.getTransaction().commit();
+        entityManager.close();
+
+        return accounts;
     }
 
     @Override
     public void save(Account account) {
-        // todo: save an account sing EntityManager
+        EntityManager entityManager = emf.createEntityManager();
+        entityManager.getTransaction().begin();
+
+        System.out.println(account);
+        entityManager.persist(account);
+
+        entityManager.getTransaction().commit();
+        entityManager.close();
     }
 
+    private Account performSelect(Function<EntityManager, Account> operation){
+        EntityManager entityManager = emf.createEntityManager();
+        entityManager.getTransaction().begin();
+
+        Account account = operation.apply(entityManager);
+
+        entityManager.getTransaction().commit();
+        entityManager.close();
+        return account;
+    }
 
 }

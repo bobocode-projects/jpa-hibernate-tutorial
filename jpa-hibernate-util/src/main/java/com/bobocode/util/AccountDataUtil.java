@@ -1,6 +1,5 @@
 package com.bobocode.util;
 
-
 import com.bobocode.model.Account;
 import io.codearte.jfairy.Fairy;
 import io.codearte.jfairy.producer.person.Person;
