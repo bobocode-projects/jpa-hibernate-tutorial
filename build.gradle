@@ -17,7 +17,7 @@ subprojects {
     apply plugin: 'java'
 
     dependencies {
-        compile 'org.projectlombok:lombok:1.16.12'
+        compile 'org.projectlombok:lombok:1.16.18'
 
         compile "org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final-redhat-1"
         compile "org.hibernate:hibernate-core:5.2.4.Final"

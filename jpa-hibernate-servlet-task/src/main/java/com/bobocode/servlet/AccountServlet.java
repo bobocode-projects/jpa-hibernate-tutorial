@@ -18,6 +18,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 import static com.bobocode.util.StringUtil.parseUrlMapping;
+import static java.util.Objects.nonNull;
+import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 @WebServlet(name = "AccountServlet", urlPatterns = "/account/*")
 public class AccountServlet extends HttpServlet {
@@ -114,8 +116,12 @@ public class AccountServlet extends HttpServlet {
         String lastName = req.getParameter("lastName");
         String pass = req.getParameter("password");
         String email = req.getParameter("email");
-        LocalDate birthday = LocalDate.parse(req.getParameter("birthday"));
-        BigDecimal balance = BigDecimal.valueOf(Double.parseDouble(req.getParameter("balance")));
+
+        String birthdayString = req.getParameter("birthday");
+        LocalDate birthday = isEmpty(birthdayString) ? LocalDate.now() : LocalDate.parse(birthdayString);
+
+        String balanceString = req.getParameter("balance");
+        BigDecimal balance = isEmpty(balanceString) ? BigDecimal.ZERO : BigDecimal.valueOf(Double.parseDouble(balanceString));
 
         return new Account(firstName, lastName, email, pass, birthday, balance);
     }

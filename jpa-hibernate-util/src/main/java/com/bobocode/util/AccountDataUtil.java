@@ -38,7 +38,7 @@ public class AccountDataUtil {
                 person.getDateOfBirth().getMonthOfYear(),
                 person.getDateOfBirth().getDayOfMonth()));
         fakeAccount.setBalance(BigDecimal.valueOf(random.nextInt(200_000)));
-        fakeAccount.setCreationDate(LocalDate.now());
+        fakeAccount.setCreationDate(LocalDate.now().minusWeeks(random.nextInt(365)));
 
         return fakeAccount;
     }

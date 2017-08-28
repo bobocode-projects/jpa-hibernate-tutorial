@@ -10,22 +10,31 @@ import javax.persistence.EntityManagerFactory;
 import java.util.function.Consumer;
 
 public class BasicsOperations {
+
     private static EntityManagerFactory emf;
 
+
     public static void main(String[] args) {
+
         emf = DBUtil.getEntityManagerFactory();
 
         Account account = saveFakeAccount();
+
         findAndPrintAllAccounts();
+
         findAndPrintAccountByEmail();
+
         removeAccount(account);
+
         findAndPrintAllAccounts();
 
         DBUtil.destroy();
     }
 
+
     private static Account saveFakeAccount() {
         System.out.println("1 - save new account");
+
         Account account = AccountDataUtil.generateFakeAccount();
         performWithinPersistenseContext(em -> {
             em.persist(account);
@@ -36,6 +45,7 @@ public class BasicsOperations {
 
     private static void findAndPrintAllAccounts() {
         System.out.println("\n2 - get all accounts");
+
         performWithinPersistenseContext(em ->
                 em.createQuery("select a from Account a")
                         .getResultList()
@@ -45,12 +55,13 @@ public class BasicsOperations {
 
     private static void findAndPrintAccountByEmail() {
         System.out.println("\n3 - find by email");
+
         performWithinPersistenseContext(em -> {
-                    String email = "mperry@gmail.com";
-                    Account metthew = em.createQuery("select a from Account a where a.email = :email", Account.class)
+                    String email = "%com";
+                    Account metthew = em.createQuery("select a from Account a where a.email like :email", Account.class)
                             .setParameter("email", email)
                             .getResultList().iterator().next();
-                    System.out.println("Account by email=" + email + " " + ((metthew != null) ? metthew : " is not found"));
+                    System.out.println("Account by email like = " + email + " " + ((metthew != null) ? metthew : " is not found"));
                 }
 
         );
@@ -58,6 +69,7 @@ public class BasicsOperations {
 
     private static void removeAccount(Account account) {
         System.out.println("\n4 - remove account with id=" + account.getId());
+
         performWithinPersistenseContext(em -> {
             Account mergedAccount = em.merge(account);
             em.remove(mergedAccount);
@@ -65,7 +77,8 @@ public class BasicsOperations {
 
     }
 
-    private static void performWithinPersistenseContext(Consumer<EntityManager> operation) {
+    private static void performWithinPersistenseContext(Consumer<EntityManager> operation) {// commander pattern! )
+
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
 

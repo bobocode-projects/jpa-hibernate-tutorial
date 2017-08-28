@@ -10,6 +10,7 @@ import javax.persistence.EntityManagerFactory;
 
 public class JpaHelloWorld {
     public static void main(String[] args) {
+
         EntityManagerFactory emf = DBUtil.getEntityManagerFactory();
 
         EntityManager em = emf.createEntityManager();
