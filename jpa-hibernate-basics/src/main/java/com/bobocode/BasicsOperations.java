@@ -37,25 +37,22 @@ public class BasicsOperations {
     private static void findAndPrintAllAccounts() {
         System.out.println("\n2 - get all accounts");
         performWithinPersistenseContext(em ->
-                em.createQuery("select a from Account a")
+                em.createQuery("select a from Account a", Account.class)
                         .getResultList()
-                        .stream()
                         .forEach(System.out::println));
     }
 
     private static void findAndPrintAccountByEmail() {
         System.out.println("\n3 - find by email");
         performWithinPersistenseContext(em -> {
-                    String email = "mperry@gmail.com";
-                    Account metthew = em.createQuery("select a from Account a where a.email = :email", Account.class)
+                    String email = "asd@asd.asd";
+                    em.createQuery("select a from Account a where a.email = :email", Account.class)
                             .setParameter("email", email)
-                            .getResultList().iterator().next();
-                    System.out.println("Account by email=" + email + " " + ((metthew != null) ? metthew : " is not found"));
+                            .getResultList()
+                            .forEach(a -> System.out.println("Account by email=" + a));
                 }
-
         );
     }
-
     private static void removeAccount(Account account) {
         System.out.println("\n4 - remove account with id=" + account.getId());
         performWithinPersistenseContext(em -> {
