@@ -1,24 +1,24 @@
 package com.bobocode;
 
-
-import com.bobocode.model.Account;
-import com.bobocode.util.AccountDataUtil;
+import com.bobocode.model.User;
 import com.bobocode.util.DBUtil;
+import com.bobocode.util.TestDataGenerator;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
-public class JpaHelloWorld {
+public class EntityManagerSimpleExample {
     public static void main(String[] args) {
+
         EntityManagerFactory emf = DBUtil.getEntityManagerFactory();
 
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
 
-        Account account = AccountDataUtil.generateFakeAccount();
-        em.persist(account);
+        User user = TestDataGenerator.generateUser();
+        em.persist(user);
 
-        System.out.println(account);
+        System.out.println(user);
 
         em.getTransaction().commit();
         em.close();

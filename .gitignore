@@ -6,3 +6,4 @@ gradle/
 gradlew
 gradlew.bat
 **/build
+/jpa-hibernate-advanced-model

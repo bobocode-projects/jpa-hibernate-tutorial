@@ -3,4 +3,6 @@ include 'jpa-hibernate-basics'
 include 'jpa-hibernate-servlet-task'
 include 'jpa-hibernate-util'
 include 'jpa-hibernate-model'
+include 'jpa-hibernate-advanced-model'
+include 'jpa-hibernate-mapping-types'
 
