@@ -2,7 +2,6 @@ package com.bobocode;
 
 import com.bobocode.model.Address;
 import com.bobocode.model.User;
-import com.bobocode.util.DBUtil;
 import com.bobocode.util.JpaUtil;
 import com.bobocode.util.TestDataGenerator;
 
@@ -10,7 +9,7 @@ import static com.bobocode.util.JpaUtil.performWithinPersistenceContext;
 
 public class OneToOneRelationExample {
     public static void main(String[] args) {
-        JpaUtil.init(DBUtil.getEntityManagerFactory());
+        JpaUtil.init("bobocode");
 
         User user = TestDataGenerator.generateUser();
         System.out.println("Generated user: " + user);
@@ -22,8 +21,7 @@ public class OneToOneRelationExample {
 
         findAndPrintUserById(user.getId());
 
-
-        DBUtil.destroy();
+        JpaUtil.close();
 
     }
     private static void saveUserWithAddress(User user, Address address){

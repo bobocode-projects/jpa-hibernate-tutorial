@@ -37,6 +37,13 @@ public class User {
     @OneToMany(mappedBy = "user")
     private Set<Role> roles = new HashSet<>();
 
+    public User(String firstName, String lastName, LocalDate birthday, Credentials credentials) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthday = birthday;
+        this.credentials = credentials;
+        this.creationDate = LocalDate.now();
+    }
 
     public void addRole(Role role){
         roles.add(role);

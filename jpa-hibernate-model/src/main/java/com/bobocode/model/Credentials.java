@@ -16,4 +16,9 @@ public class Credentials {
     private String password;
     @Column(name = "last_modified_password")
     private LocalDateTime lastModifiedPassword;
+
+    public Credentials(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
 }

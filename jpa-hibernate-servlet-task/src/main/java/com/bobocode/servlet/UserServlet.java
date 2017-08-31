@@ -1,10 +1,11 @@
 package com.bobocode.servlet;
 
 
-import com.bobocode.dao.AccountDao;
-import com.bobocode.dao.impl.AccountDaoImpl;
+import com.bobocode.dao.UserDao;
+import com.bobocode.dao.impl.UserDaoImpl;
 import com.bobocode.exception.InvalidRequestParametersException;
-import com.bobocode.model.Account;
+import com.bobocode.model.Credentials;
+import com.bobocode.model.User;
 
 import javax.persistence.EntityManagerFactory;
 import javax.servlet.ServletException;
@@ -13,20 +14,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
 import static com.bobocode.util.StringUtil.parseUrlMapping;
 
-@WebServlet(name = "AccountServlet", urlPatterns = "/account/*")
-public class AccountServlet extends HttpServlet {
-    private AccountDao accountDao;
+@WebServlet(name = "UserServlet", urlPatterns = "/user/*")
+public class UserServlet extends HttpServlet {
+    private UserDao userDao;
 
     @Override
     public void init() throws ServletException {
         EntityManagerFactory emf = (EntityManagerFactory) getServletContext().getAttribute("emf");
-        accountDao = new AccountDaoImpl(emf);
+        userDao = new UserDaoImpl(emf);
     }
 
     @Override
@@ -87,37 +87,36 @@ public class AccountServlet extends HttpServlet {
     }
 
     private void processCreateAccount(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        Account account = createEntity(req);
-        accountDao.save(account);
-        processGetById(req, resp, account.getId());
+        User user = createEntity(req);
+        userDao.save(user);
+        processGetById(req, resp, user.getId());
     }
 
     private void processGetById(HttpServletRequest req, HttpServletResponse resp, Long id) throws IOException, ServletException {
-        Account account = accountDao.findOne(id);
+        User user = userDao.findOne(id);
 
-        if (account != null) {
-            req.setAttribute("account", account);
-            req.getRequestDispatcher("/account.jsp").forward(req, resp);
+        if (user != null) {
+            req.setAttribute("user", user);
+            req.getRequestDispatcher("/user.jsp").forward(req, resp);
         } else {
-            handleNotFound(resp, "Account not found by id=" + id);
+            handleNotFound(resp, "User not found by id=" + id);
         }
     }
 
     private void processGetList(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Account> accountList = accountDao.findAll();
-        req.setAttribute("accountList", accountList);
+        List<User> userList = userDao.findAll();
+        req.setAttribute("userList", userList);
         req.getRequestDispatcher("/list.jsp").forward(req, resp);
     }
 
-    private Account createEntity(HttpServletRequest req) {
+    private User createEntity(HttpServletRequest req) {
         String firstName = req.getParameter("firstName");
         String lastName = req.getParameter("lastName");
         String pass = req.getParameter("password");
         String email = req.getParameter("email");
         LocalDate birthday = LocalDate.parse(req.getParameter("birthday"));
-        BigDecimal balance = BigDecimal.valueOf(Double.parseDouble(req.getParameter("balance")));
 
-        return new Account(firstName, lastName, email, pass, birthday, balance);
+        return new User(firstName, lastName, birthday, new Credentials(email, pass));
     }
 
     private void handleInvalidUrl(HttpServletResponse resp) throws IOException {

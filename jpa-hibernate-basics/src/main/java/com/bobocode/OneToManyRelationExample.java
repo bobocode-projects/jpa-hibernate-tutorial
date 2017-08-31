@@ -2,7 +2,6 @@ package com.bobocode;
 
 import com.bobocode.model.Role;
 import com.bobocode.model.User;
-import com.bobocode.util.DBUtil;
 import com.bobocode.util.JpaUtil;
 import com.bobocode.util.TestDataGenerator;
 
@@ -12,7 +11,7 @@ import static com.bobocode.util.JpaUtil.performWithinPersistenceContext;
 
 public class OneToManyRelationExample {
     public static void main(String[] args) {
-        JpaUtil.init(DBUtil.getEntityManagerFactory());
+        JpaUtil.init("bobocode");
 
         User user = TestDataGenerator.generateUser();
         List<Role> roles = TestDataGenerator.generateRoleList();
@@ -23,7 +22,7 @@ public class OneToManyRelationExample {
 
         findAndPrintUserById(user.getId());
 
-        DBUtil.destroy();
+        JpaUtil.close();
 
     }
 

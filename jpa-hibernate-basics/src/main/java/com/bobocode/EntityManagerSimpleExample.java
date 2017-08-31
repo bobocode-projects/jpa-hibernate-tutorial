@@ -1,7 +1,7 @@
 package com.bobocode;
 
 import com.bobocode.model.User;
-import com.bobocode.util.DBUtil;
+import com.bobocode.util.JpaUtil;
 import com.bobocode.util.TestDataGenerator;
 
 import javax.persistence.EntityManager;
@@ -9,8 +9,9 @@ import javax.persistence.EntityManagerFactory;
 
 public class EntityManagerSimpleExample {
     public static void main(String[] args) {
+        JpaUtil.init("bobocode");
+        EntityManagerFactory emf = JpaUtil.getEntityManagerFactory();
 
-        EntityManagerFactory emf = DBUtil.getEntityManagerFactory();
 
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
@@ -23,6 +24,6 @@ public class EntityManagerSimpleExample {
         em.getTransaction().commit();
         em.close();
 
-        DBUtil.destroy();
+        JpaUtil.close();
     }
 }

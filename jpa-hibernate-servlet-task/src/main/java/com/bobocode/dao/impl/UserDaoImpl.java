@@ -1,23 +1,23 @@
 package com.bobocode.dao.impl;
 
-import com.bobocode.dao.AccountDao;
-import com.bobocode.model.Account;
+import com.bobocode.dao.UserDao;
+import com.bobocode.model.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import java.util.List;
 
 
-public class AccountDaoImpl implements AccountDao {
+public class UserDaoImpl implements UserDao {
 
     private final EntityManagerFactory emf;
 
-    public AccountDaoImpl(EntityManagerFactory emf) {
+    public UserDaoImpl(EntityManagerFactory emf) {
         this.emf = emf;
     }
 
     @Override
-    public Account findOne(Long id) {
+    public User findOne(Long id) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
 
@@ -31,20 +31,22 @@ public class AccountDaoImpl implements AccountDao {
     }
 
     @Override
-    public Account findByEmail(String email) {
+    public User findByEmail(String email) {
         // todo: implement search by email via EntityManager
         throw new UnsupportedOperationException("Method is not implemented yet. It's your homework!");
     }
 
     @Override
-    public List<Account> findAll() {
+    public List<User> findAll() {
         //todo: find and return all accounts using EntityManagers
         throw new UnsupportedOperationException("Method is not implemented yet. It's your homework!");
     }
 
+
     @Override
-    public void save(Account account) {
+    public void save(User user) {
         // todo: save an account sing EntityManager
+        throw new UnsupportedOperationException("Method is not implemented yet. It's your homework!");
     }
 
 

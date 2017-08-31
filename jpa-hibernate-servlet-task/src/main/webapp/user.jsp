@@ -8,16 +8,15 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <title>${account.firstName}</title>
+    <title>${user.firstName}</title>
 
 </head>
 <body>
 <div class="container">
-    <input type="text" readonly="true" value="${account.firstName}"/>
-    <input type="text" readonly="true" value="${account.lastName}"/>
-    <input type="text" readonly="true" value="${account.email}"/>
-    <input type="date" readonly="true" value="${account.birthday}"/>
-    <input type="text" readonly="true" value="${account.balance}"/>
+    <input type="text" readonly="true" value="${user.firstName}"/>
+    <input type="text" readonly="true" value="${user.lastName}"/>
+    <input type="text" readonly="true" value="${user.email}"/>
+    <input type="date" readonly="true" value="${user.birthday}"/>
 </div>
 
 </body>

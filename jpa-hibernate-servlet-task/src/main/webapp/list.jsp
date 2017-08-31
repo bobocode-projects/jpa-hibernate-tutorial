@@ -18,7 +18,7 @@
 <body>
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
-        <h2 class="page-header">Account list</h2>
+        <h2 class="page-header">User list</h2>
 
         <table class="table table-striped">
             <tr>
@@ -27,17 +27,15 @@
                 <th>Last name</th>
                 <th>Email</th>
                 <th>Birthday</th>
-                <th>Balance $</th>
                 <th></th>
             </tr>
-            <c:forEach items="${accountList}" var="account" varStatus="status">
+            <c:forEach items="${userList}" var="user" varStatus="status">
                 <tr>
                     <td>${status.index + 1}</td>
-                    <td>${account.firstName}</td>
-                    <td>${account.lastName}</td>
-                    <td>${account.email}</td>
-                    <td>${account.birthday}</td>
-                    <td>${account.balance}</td>
+                    <td>${user.firstName}</td>
+                    <td>${user.lastName}</td>
+                    <td>${user.credentials.email}</td>
+                    <td>${user.birthday}</td>
                 </tr>
             </c:forEach>
         </table>

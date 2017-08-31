@@ -19,7 +19,7 @@
 <div class="row">
     <div class="col-md-4 col-md-offset-4">
         <h2 class="page-header">Create new account</h2>
-        <form method="post" action="account">
+        <form method="post" action="user">
             <div class="form-group">
                 <label for="firstName">First name</label>
                 <input type="text" name="firstName" class="form-control" id="firstName" placeholder="Johnny"/>
@@ -39,10 +39,6 @@
             <div class="form-group">
                 <label for="birthday">Birthday</label>
                 <input type="date"  name="birthday" class="form-control" id="birthday" placeholder="08/19/1969"/>
-            </div>
-            <div class="form-group">
-                <label for="balance">Balance</label>
-                <input type="text"  name="balance" class="form-control" id="balance" placeholder="123123.02"/>
             </div>
 
             <button type="submit" class="btn btn-default">Save</button>
