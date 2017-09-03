@@ -1,9 +1,6 @@
 package com.bobocode.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -31,10 +28,10 @@ public class User {
     @Embedded
     private Credentials credentials;
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Address address;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Role> roles = new HashSet<>();
 
     public User(String firstName, String lastName, LocalDate birthday, Credentials credentials) {
@@ -45,7 +42,12 @@ public class User {
         this.creationDate = LocalDate.now();
     }
 
-    public void addRole(Role role){
+    public void setAddress(Address address) {
+        address.setUser(this);
+        this.address = address;
+    }
+
+    public void addRole(Role role) {
         roles.add(role);
         role.setUser(this);
     }
@@ -53,5 +55,25 @@ public class User {
     public void addRoles(List<Role> roles) {
         this.roles.addAll(roles);
         roles.forEach(role -> role.setUser(this));
+    }
+
+    public void removeRole(Role role){
+        this.roles.remove(role);
+        role.setUser(null); // if you do this first, you will break Role#equals() method
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        return this.getCredentials().equals(user.getCredentials());
+    }
+
+    @Override
+    public int hashCode() {
+        return this.getCredentials().hashCode();
     }
 }

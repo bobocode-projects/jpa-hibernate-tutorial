@@ -21,4 +21,19 @@ public class Credentials {
         this.email = email;
         this.password = password;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Credentials that = (Credentials) o;
+
+        return this.getEmail().equals(that.getEmail());
+    }
+
+    @Override
+    public int hashCode() {
+        return this.getEmail().hashCode();
+    }
 }

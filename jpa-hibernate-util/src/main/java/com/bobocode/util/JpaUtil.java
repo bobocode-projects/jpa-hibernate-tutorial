@@ -24,9 +24,15 @@ public class JpaUtil {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
 
-        operation.accept(em);
-
-        em.getTransaction().commit();
-        em.close();
+        try {
+            operation.accept(em);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            System.out.println("Transaction is rolled back");
+            e.printStackTrace();
+        } finally {
+            em.close();
+        }
     }
 }

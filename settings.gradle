@@ -6,4 +6,5 @@ include 'jpa-hibernate-model'
 include 'jpa-hibernate-advanced-model'
 include 'jpa-hibernate-mapping-types'
 include 'jpa-hibernate-id-generation-strategies'
+include 'jpa-hibernate-servlet-advanced-task'
 
