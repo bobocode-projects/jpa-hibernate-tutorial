@@ -11,7 +11,7 @@ import java.util.List;
 
 import static com.bobocode.util.JpaUtil.performWithinPersistenceContext;
 
-public class EntityCascadeExamples {
+public class EntityActionCascadeExamples {
     public static void main(String[] args) {
         JpaUtil.init("bobocode");
 

@@ -12,3 +12,6 @@ new entities `User`, `Address` and link them together.
 
 **OneToManyRelationExample** provides an example of one to many relation between `User` and it's `Role` list. The relation
 is managed on the client side (Role side). Table `roles` contains a _foreign key_ `user_id`
+
+**EntityActionCascadeExamples** provides an example of cascading. _JPA_ allows you to specify a **cascade type** for entity
+relations. Cascade type defines which operation is performed on the relation when it is performed on the parent entity.  
