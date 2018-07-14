@@ -1,6 +1,5 @@
-package model;
+package com.bobocode.model;
 
-import com.bobocode.model.Comment;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

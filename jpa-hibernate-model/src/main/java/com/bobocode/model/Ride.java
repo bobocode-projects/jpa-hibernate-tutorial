@@ -1,4 +1,4 @@
-package model;
+package com.bobocode.model;
 
 
 import lombok.Getter;

@@ -1,6 +1,0 @@
-group 'com.bobocode'
-version '1.0'
-
-dependencies{
-    compile project(':jpa-hibernate-util')
-}
