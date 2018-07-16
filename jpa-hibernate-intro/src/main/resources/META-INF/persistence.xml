@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" version="2.1">
 
-    <persistence-unit name="BasicEntitiesPostgres">
+    <persistence-unit name="SingleAccountEntityPostgres">
         <class>com.bobocode.model.Account</class>
-        <class>com.bobocode.model.basic.Address</class>
-        <class>com.bobocode.model.basic.Credentials</class>
-        <class>com.bobocode.model.basic.Role</class>
-        <class>com.bobocode.model.basic.User</class>
 
         <properties>
             <property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/bobocode_db"/>
@@ -14,19 +10,12 @@
             <property name="hibernate.connection.username" value="bobouser"/>
             <property name="hibernate.connection.password" value="bobopass"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL95Dialect"/>
-            <property name="hibernate.show_sql" value="true"/>
-            <property name="hibernate.format_sql" value="true"/>
             <property name="hibernate.hbm2ddl.auto" value="create"/>
-
         </properties>
     </persistence-unit>
 
-    <persistence-unit name="BasicEntitiesH2">
+    <persistence-unit name="SingleAccountEntityH2">
         <class>com.bobocode.model.Account</class>
-        <class>com.bobocode.model.basic.Address</class>
-        <class>com.bobocode.model.basic.Credentials</class>
-        <class>com.bobocode.model.basic.Role</class>
-        <class>com.bobocode.model.basic.User</class>
 
         <properties>
             <property name="hibernate.connection.url" value="jdbc:h2:mem:bobocode_db;DB_CLOSE_DELAY=-1"/>
@@ -34,8 +23,6 @@
             <property name="hibernate.connection.username" value="bobouser"/>
             <property name="hibernate.connection.password" value="bobopass"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
-            <property name="hibernate.show_sql" value="true"/>
-            <property name="hibernate.format_sql" value="true"/>
             <property name="hibernate.hbm2ddl.auto" value="create"/>
         </properties>
     </persistence-unit>
