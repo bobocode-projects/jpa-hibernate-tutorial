@@ -7,8 +7,6 @@ import com.bobocode.model.basic.User;
 import com.bobocode.util.JpaUtil;
 import com.bobocode.util.TestDataGenerator;
 
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import java.util.List;
 
 import static com.bobocode.util.JpaUtil.performWithinPersistenceContext;
@@ -17,10 +15,10 @@ import static com.bobocode.util.JpaUtil.performWithinPersistenceContext;
  * This example demonstrates how Hibernate creates proxies around entities.
  */
 public class HibernateProxies {
-    private static EntityManagerFactory emf;
 
     public static void main(String[] args) {
-        init();
+        JpaUtil.init("BasicEntitiesH2");
+
 
         User user = TestDataGenerator.generateUser();
         List<Role> roles = TestDataGenerator.generateRoleList();
@@ -30,15 +28,6 @@ public class HibernateProxies {
         printUserProxyClassByUserId(user.getId());
         printRoleSetProxyClassByUserId(user.getId());
 
-        close();
-    }
-
-    private static void init() {
-        JpaUtil.init("BasicEntitiesH2");
-        emf = JpaUtil.getEntityManagerFactory();
-    }
-
-    private static void close() {
         JpaUtil.close();
     }
 
@@ -52,6 +41,7 @@ public class HibernateProxies {
 
     /**
      * This examples uses {@link javax.persistence.EntityManager#getReference(Class, Object)} to create a user proxy
+     *
      * @param userId
      */
     private static void printUserProxyClassByUserId(Long userId) {

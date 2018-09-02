@@ -11,7 +11,7 @@ import java.util.Set;
 
 @NoArgsConstructor
 @Getter @Setter @ToString
-@EqualsAndHashCode(of = "credentials")
+@EqualsAndHashCode(of = "id")
 @Entity
 @Table(name = "users")
 public class User {

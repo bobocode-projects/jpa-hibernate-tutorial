@@ -1,5 +1,7 @@
 package com.bobocode.util;
 
+import com.bobocode.util.exception.JpaUtilException;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -30,8 +32,7 @@ public class JpaUtil {
             em.getTransaction().commit();
         } catch (Exception e) {
             em.getTransaction().rollback();
-            System.out.println("Transaction is rolled back");
-            e.printStackTrace();
+            throw new JpaUtilException("Error performing JPA operation. Transaction is rolled back", e);
         } finally {
             em.close();
         }

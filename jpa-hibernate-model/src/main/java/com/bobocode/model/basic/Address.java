@@ -1,16 +1,14 @@
 package com.bobocode.model.basic;
 
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @Getter @Setter
+@EqualsAndHashCode(of = "id")
 @ToString(exclude = "user")
 @Entity
 @Table(name = "address")
@@ -31,19 +29,4 @@ public class Address {
 
     @OneToOne
     private User user;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Address address = (Address) o;
-
-        return id.equals(address.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return id.hashCode();
-    }
 }

@@ -6,17 +6,16 @@ import com.bobocode.model.basic.User;
 import com.bobocode.util.JpaUtil;
 import com.bobocode.util.TestDataGenerator;
 
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.OneToMany;
 import java.util.List;
 
 import static com.bobocode.util.JpaUtil.performWithinPersistenceContext;
 
 public class ActionCascade {
-    private static EntityManagerFactory emf;
 
     public static void main(String[] args) {
-        init();
+        JpaUtil.init("BasicEntitiesH2");
+
 
         User user = TestDataGenerator.generateUser();
         List<Role> roles = TestDataGenerator.generateRoleList();
@@ -26,15 +25,6 @@ public class ActionCascade {
         orphanRemoveRoleByUserId(user.getId());
         cascadeRemoveRoleByUserId(user.getId());
 
-        close();
-    }
-
-    private static void init() {
-        JpaUtil.init("BasicEntitiesH2");
-        emf = JpaUtil.getEntityManagerFactory();
-    }
-
-    private static void close() {
         JpaUtil.close();
     }
 

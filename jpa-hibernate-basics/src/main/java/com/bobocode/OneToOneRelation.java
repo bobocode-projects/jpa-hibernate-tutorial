@@ -5,15 +5,12 @@ import com.bobocode.model.basic.User;
 import com.bobocode.util.JpaUtil;
 import com.bobocode.util.TestDataGenerator;
 
-import javax.persistence.EntityManagerFactory;
-
 import static com.bobocode.util.JpaUtil.performWithinPersistenceContext;
 
 public class OneToOneRelation {
-    private static EntityManagerFactory emf;
 
     public static void main(String[] args) {
-        init();
+        JpaUtil.init("BasicEntitiesH2");
 
         User user = TestDataGenerator.generateUser();
         System.out.println("Generated user: " + user);
@@ -25,18 +22,8 @@ public class OneToOneRelation {
 
         printUserById(user.getId());
 
-        close();
-    }
-
-    private static void init() {
-        JpaUtil.init("BasicEntitiesH2");
-        emf = JpaUtil.getEntityManagerFactory();
-    }
-
-    private static void close() {
         JpaUtil.close();
     }
-
 
     private static void saveUserWithAddress(User user, Address address) {
         performWithinPersistenceContext(em -> {

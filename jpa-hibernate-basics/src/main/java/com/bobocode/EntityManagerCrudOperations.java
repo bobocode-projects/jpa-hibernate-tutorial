@@ -2,50 +2,36 @@ package com.bobocode;
 
 
 import com.bobocode.model.Account;
-import com.bobocode.model.basic.User;
 import com.bobocode.util.JpaUtil;
 import com.bobocode.util.TestDataGenerator;
-
-import javax.persistence.EntityManagerFactory;
 
 import static com.bobocode.util.JpaUtil.performWithinPersistenceContext;
 
 public class EntityManagerCrudOperations {
-    private static EntityManagerFactory emf;
 
     public static void main(String[] args) {
-        init();
-
-        Account account = saveFakeUser();
-        findAndPrintAllUsers();
-        findAndPrintUserByEmail(account.getEmail());
-        removeAccount(account);
-        findAndPrintAllUsers();
-
-        close();
-    }
-
-    private static void init() {
         JpaUtil.init("BasicEntitiesH2");
-        emf = JpaUtil.getEntityManagerFactory();
-    }
 
-    private static void close() {
+
+        Account account = saveFakeAccount();
+        findAndPrintAllAccounts();
+        findAndPrintAccountByEmail(account.getEmail());
+        removeAccount(account);
+        findAndPrintAllAccounts();
+
         JpaUtil.close();
     }
 
-    private static Account saveFakeUser() {
+    private static Account saveFakeAccount() {
         System.out.println("Save new account");
         System.out.println("-----------------------------");
         Account account = TestDataGenerator.generateAccount();
-        performWithinPersistenceContext(em -> {
-            em.persist(account);
-            System.out.println(account);
-        });
+        performWithinPersistenceContext(em -> em.persist(account));
+        System.out.println(account);
         return account;
     }
 
-    private static void findAndPrintAllUsers() {
+    private static void findAndPrintAllAccounts() {
         System.out.println("\nGet all accounts");
         System.out.println("-----------------------------");
         performWithinPersistenceContext(em ->
@@ -55,7 +41,7 @@ public class EntityManagerCrudOperations {
                         .forEach(System.out::println));
     }
 
-    private static void findAndPrintUserByEmail(String email) {
+    private static void findAndPrintAccountByEmail(String email) {
         System.out.println("\nFind by email");
         System.out.println("-----------------------------");
         performWithinPersistenceContext(em -> {

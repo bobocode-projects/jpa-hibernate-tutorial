@@ -18,7 +18,6 @@
         <module>jpa-hibernate-basics</module>
         <module>jpa-hibernate-model</module>
         <module>jpa-hibernate-util</module>
-        <module>jpa-hibernate-intro</module>
     </modules>
 
     <dependencies>
