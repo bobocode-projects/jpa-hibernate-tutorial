@@ -29,13 +29,13 @@ public class JpaTransaction {
      * @param entityManager
      */
     private static void saveAccountWithinTx(Account account, EntityManager entityManager) {
-        entityManager.getTransaction().begin();
+        entityManager.getTransaction().begin(); // calls Connection#setAutoCommit(false)
         try {
             entityManager.persist(account);
-            entityManager.getTransaction().commit();
+            entityManager.getTransaction().commit();// calls Connection#commit()
             System.out.printf("Account %s has been saved.%n", account);
         } catch (Exception e) {
-            entityManager.getTransaction().rollback();
+            entityManager.getTransaction().rollback(); // calls Connection#rollback()
             System.err.printf("Error saving account %s. Transaction has been rolled back.%n", account);
         } finally {
             entityManager.close();
