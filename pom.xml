@@ -16,8 +16,9 @@
 
     <modules>
         <module>jpa-hibernate-basics</module>
-        <module>jpa-hibernate-model</module>
-        <module>jpa-hibernate-util</module>
+        <module>jpa-hibernate-tutorial-model</module>
+        <module>jpa-hibernate-tutorial-util</module>
+        <module>dirty-checking-mechanism</module>
     </modules>
 
     <dependencies>

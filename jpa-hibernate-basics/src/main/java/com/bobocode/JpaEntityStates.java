@@ -19,6 +19,14 @@ public class JpaEntityStates {
 
         printAccountInTransientState(account);
         printAccountInPersistentState(account);
+        Long id = account.getId();
+
+        performWithinPersistenceContext(entityManager -> {
+            Account managedAccount
+                    = entityManager.find(Account.class, id);
+        });
+
+
         printAccountInDetachedState(account);
         printAccountInRemovedState(account);
 
@@ -46,7 +54,6 @@ public class JpaEntityStates {
         performWithinPersistenceContext(entityManager -> {
             entityManager.persist(account); // stores an account in the database (makes it persistent)
             System.out.printf("Account in PERSISTENT state: %s%n", account);
-            ;
         });
     }
 
@@ -70,7 +77,8 @@ public class JpaEntityStates {
         performWithinPersistenceContext(entityManager -> {
             Account mergedAccount = entityManager.merge(account);
             entityManager.remove(mergedAccount);
-            System.out.println(account);
+            System.out.printf("Account in REMOVED state: %s%n", mergedAccount);
+
         });
     }
 }

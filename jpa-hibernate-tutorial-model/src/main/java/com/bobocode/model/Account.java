@@ -10,12 +10,12 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Getter @Setter
 @ToString
-@EqualsAndHashCode(of = "email")
+@EqualsAndHashCode(of = "id")
 @Entity
 @Table(name = "accounts")
 public class Account {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "first_name")

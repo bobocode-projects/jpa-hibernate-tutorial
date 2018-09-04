@@ -45,7 +45,8 @@ public class EntityManagerCrudOperations {
         System.out.println("\nFind by email");
         System.out.println("-----------------------------");
         performWithinPersistenceContext(em -> {
-                    Account account = em.createQuery("select a from Account a where a.email = :email", Account.class)
+                    Account account
+                            = em.createQuery("select a from Account a where a.email = :email", Account.class)
                             .setParameter("email", email)
                             .getSingleResult();
                     System.out.println(account);

@@ -9,6 +9,20 @@
         <artifactId>jpa-hibernate-tutorial</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>jpa-hibernate-model</artifactId>
-    
+    <artifactId>jpa-hibernate-tutorial-util</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.bobocode</groupId>
+            <artifactId>jpa-hibernate-tutorial-model</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>io.codearte.jfairy</groupId>
+            <artifactId>jfairy</artifactId>
+            <version>0.5.7</version>
+        </dependency>
+    </dependencies>
+
+
 </project>
