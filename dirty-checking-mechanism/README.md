@@ -13,11 +13,11 @@ the same data as corresponding database row. At flush time, every entity is comp
 `UPDATE` statement.
 
 ```java
-        performWithinPersistenceContext(entityManager -> { // Persistence Context begins
-            Account account = entityManager.find(Account.class, accountId); // account is managed by Hibernate
-            account.setLastName(newLastName); // this changes will be detected by Dirty Checking mechanism
-            // on flush dirty checking will generate UPDATE statement and will send it to the database
-        });// Persistence Context ends
+performWithinPersistenceContext(entityManager -> { // Persistence Context begins
+    Account account = entityManager.find(Account.class, accountId); // account is managed by Hibernate
+    account.setLastName(newLastName); // this changes will be detected by Dirty Checking mechanism
+    // on flush dirty checking will generate UPDATE statement and will send it to the database
+});// Persistence Context ends
 ``` 
 
 Please note, that this mechanism has **huge performance impact**, because it **doubles the size of the *PC***, requires 
@@ -26,24 +26,24 @@ In order to **turn of dirty checking**, you should set default read-only for the
 new select query.
 
 ```java
-        performWithinPersistenceContext(entityManager -> {
-            Session session = entityManager.unwrap(Session.class);
-            session.setDefaultReadOnly(true); // turns off dirty checking for this session (for this entityManager)
-            Account managedAccount = entityManager.find(Account.class, accountId);
-            managedAccount.setFirstName("XXX"); // won't cause SQL UPDATE statement since dirty checking is disabled
-        });
+performWithinPersistenceContext(entityManager -> {
+    Session session = entityManager.unwrap(Session.class);
+    session.setDefaultReadOnly(true); // turns off dirty checking for this session (for this entityManager)
+    Account managedAccount = entityManager.find(Account.class, accountId);
+    managedAccount.setFirstName("XXX"); // won't cause SQL UPDATE statement since dirty checking is disabled
+});
 ```
 
 In order to disable dirty checking for a particular entity on select use query hints:
 
 ```java
-        performWithinPersistenceContext(entityManager -> {
-            Account managedAccount = entityManager.createQuery("select a from Account a where a.email = :email", Account.class)
-                    .setParameter("email", email)
-                    .setHint(QueryHints.HINT_READONLY, true)// turns off dirty checking for this particular entity
-                    .getSingleResult();
-            managedAccount.setFirstName("XXX"); // won't cause SQL UPDATE statement since dirty checking is disabled for this entity
-        });
+performWithinPersistenceContext(entityManager -> {
+    Account managedAccount = entityManager.createQuery("select a from Account a where a.email = :email", Account.class)
+            .setParameter("email", email)
+            .setHint(QueryHints.HINT_READONLY, true)// turns off dirty checking for this particular entity
+            .getSingleResult();
+    managedAccount.setFirstName("XXX"); // won't cause SQL UPDATE statement since dirty checking is disabled for this entity
+});
 ``` 
  
 ### Best practices
