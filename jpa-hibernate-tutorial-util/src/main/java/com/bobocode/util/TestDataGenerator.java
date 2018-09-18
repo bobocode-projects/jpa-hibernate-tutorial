@@ -29,14 +29,14 @@ public class TestDataGenerator {
 
         return Stream.of(RoleType.values())
                 .filter(randomPredicate)
-                .map(Role::new)
+                .map(Role::valueOf)
                 .collect(toList());
     }
 
     public static User generateUser(RoleType... roles) {
         User user = generateUser();
         Stream.of(roles)
-                .map(Role::new)
+                .map(Role::valueOf)
                 .forEach(user::addRole);
 
         return user;

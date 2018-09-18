@@ -8,41 +8,47 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 @NoArgsConstructor
-@Getter @Setter
+@Getter
+@Setter
 @ToString(exclude = "user")
 @Entity
-@Table(name = "roles")
+@Table(name = "role")
 public class Role {
     @Id
     @GeneratedValue
     private Long id;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "role_type")
     private RoleType roleType;
+
     @Column(name = "creation_date")
     private LocalDateTime creationDate = LocalDateTime.now();
 
     @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
-    public Role(RoleType roleType) {
+    public static Role valueOf(RoleType roleType) {
+        return new Role(roleType);
+    }
+
+    private Role(RoleType roleType) {
         this.roleType = roleType;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
+        if (!(o instanceof Role)) return false;
 
         Role role = (Role) o;
 
-        if (roleType != role.roleType) return false;
-        return this.getUser().equals(role.getUser());
+        return Objects.equals(id, role.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(roleType, user);
+        return 31;
     }
 }

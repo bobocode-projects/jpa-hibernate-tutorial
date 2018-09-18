@@ -14,13 +14,12 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(of = "email")
 @Embeddable
 public class Credentials {
+    @Column(name = "email")
     private String email;
+
+    @Column(name = "password")
     private String password;
+
     @Column(name = "last_modified_password")
     private LocalDateTime lastModifiedPassword;
-
-    public Credentials(String email, String password) {
-        this.email = email;
-        this.password = password;
-    }
 }

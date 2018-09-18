@@ -10,10 +10,12 @@ import java.util.Set;
 
 
 @NoArgsConstructor
-@Getter @Setter @ToString
+@Getter
+@Setter
+@ToString
 @EqualsAndHashCode(of = "id")
 @Entity
-@Table(name = "users")
+@Table(name = "user")
 public class User {
     @Id
     @GeneratedValue
@@ -37,7 +39,8 @@ public class User {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Address address;
 
-    @OneToMany(mappedBy = "user",fetch = FetchType.LAZY,cascade = CascadeType.ALL, orphanRemoval = true)
+    @Setter(AccessLevel.PRIVATE)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Role> roles = new HashSet<>();
 
     public void setAddress(Address address) {
@@ -55,8 +58,8 @@ public class User {
         roles.forEach(role -> role.setUser(this));
     }
 
-    public void removeRole(Role role){
+    public void removeRole(Role role) {
         this.roles.remove(role);
-        role.setUser(null); // if you do this first, you will break Role#equals() method
+        role.setUser(null);
     }
 }
