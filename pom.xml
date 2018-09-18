@@ -19,7 +19,8 @@
         <module>jpa-hibernate-tutorial-model</module>
         <module>jpa-hibernate-tutorial-util</module>
         <module>dirty-checking-mechanism</module>
-        <module>mapping-relations</module>
+        <module>entity-relationships-management</module>
+        <module>persistence-context</module>
     </modules>
 
     <dependencies>

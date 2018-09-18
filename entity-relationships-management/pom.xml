@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>jpa-hibernate-mapping-relations</artifactId>
+    <artifactId>entity-relationships-management</artifactId>
 
 
     <dependencies>
