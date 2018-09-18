@@ -19,14 +19,6 @@ public class JpaEntityStates {
 
         printAccountInTransientState(account);
         printAccountInPersistentState(account);
-        Long id = account.getId();
-
-        performWithinPersistenceContext(entityManager -> {
-            Account managedAccount
-                    = entityManager.find(Account.class, id);
-        });
-
-
         printAccountInDetachedState(account);
         printAccountInRemovedState(account);
 

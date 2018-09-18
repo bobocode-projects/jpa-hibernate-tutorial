@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 public class JpaUtil {
 
@@ -35,6 +36,21 @@ public class JpaUtil {
             throw new JpaUtilException("Error performing JPA operation. Transaction is rolled back", e);
         } finally {
             em.close();
+        }
+    }
+
+    public static <T> T performReturningWithinPersistenceContext(Function<EntityManager, T> entityManagerFunction) {
+        EntityManager entityManager = emf.createEntityManager();
+        entityManager.getTransaction().begin();
+        try {
+            T result = entityManagerFunction.apply(entityManager);
+            entityManager.getTransaction().commit();
+            return result;
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            throw e;
+        } finally {
+            entityManager.close();
         }
     }
 }
