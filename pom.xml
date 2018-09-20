@@ -21,6 +21,7 @@
         <module>dirty-checking-mechanism</module>
         <module>entity-relationships-management</module>
         <module>persistence-context</module>
+        <module>performance-optimization</module>
     </modules>
 
     <dependencies>
