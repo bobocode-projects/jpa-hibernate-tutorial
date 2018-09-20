@@ -80,7 +80,7 @@ public class StoringNewRelationship {
     private static void addNewRole(long userId, RoleType roleType) {
         performWithinPersistenceContext(entityManager -> {
             Role role = Role.valueOf(roleType);
-            User userProxy = entityManager.getReference(User.class, userId);
+            User userProxy = entityManager.getReference(User.class, userId); // does not call db
             role.setUser(userProxy);
             entityManager.persist(role);
         });
