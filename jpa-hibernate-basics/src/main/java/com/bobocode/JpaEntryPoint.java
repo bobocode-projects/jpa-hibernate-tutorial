@@ -1,6 +1,7 @@
 package com.bobocode;
 
 import com.bobocode.model.Account;
+import com.bobocode.util.JpaUtil;
 import com.bobocode.util.TestDataGenerator;
 
 import javax.persistence.EntityManager;
@@ -21,7 +22,10 @@ public class JpaEntryPoint {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         Account account = TestDataGenerator.generateAccount();
-        entityManager.persist(account);// saves account into a database
+
+        entityManager.getTransaction().begin();
+        entityManager.persist(account);
+        entityManager.getTransaction().commit();
 
         System.out.println(account);
 
