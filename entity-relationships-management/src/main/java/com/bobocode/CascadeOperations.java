@@ -5,7 +5,6 @@ import com.bobocode.model.basic.Role;
 import com.bobocode.model.basic.User;
 import com.bobocode.util.JpaUtil;
 import com.bobocode.util.TestDataGenerator;
-import org.hibernate.Session;
 
 import javax.persistence.OneToMany;
 import java.util.List;
@@ -46,7 +45,7 @@ public class CascadeOperations {
             // em.persist(roles);
             user.setAddress(address);
             user.addRoles(roles);
-            em.merge(user);
+            em.persist(user);
             System.out.println("Persisted user: " + user);
         });
     }
