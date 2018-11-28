@@ -25,17 +25,16 @@ public class JpaUtil {
     }
 
     public static void performWithinPersistenceContext(Consumer<EntityManager> operation) {
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-
+        EntityManager entityManager = emf.createEntityManager();
+        entityManager.getTransaction().begin();
         try {
-            operation.accept(em);
-            em.getTransaction().commit();
+            operation.accept(entityManager);
+            entityManager.getTransaction().commit();
         } catch (Exception e) {
-            em.getTransaction().rollback();
+            entityManager.getTransaction().rollback();
             throw new JpaUtilException("Error performing JPA operation. Transaction is rolled back", e);
         } finally {
-            em.close();
+            entityManager.close();
         }
     }
 
@@ -48,7 +47,7 @@ public class JpaUtil {
             return result;
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
-            throw e;
+            throw new JpaUtilException("Error performing JPA operation. Transaction is rolled back", e);
         } finally {
             entityManager.close();
         }
